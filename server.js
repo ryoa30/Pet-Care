@@ -43,21 +43,21 @@ const storage = multer.diskStorage({
     }
 });
 
-app.post('/upload-profile-pic', upload.single('profilePic'), async (req, res) => {
-    try {
-        // Extract necessary information from the request
-        const userId = req.body.userId; // Assuming you have a userId associated with the uploaded profile picture
-        const profilePicPath = req.file.path; // Path of the uploaded profile picture
+// app.post('/upload-profile-pic', upload.single('profilePic'), async (req, res) => {
+//     try {
+//         // Extract necessary information from the request
+//         const userId = req.body.userId; // Assuming you have a userId associated with the uploaded profile picture
+//         const profilePicPath = req.file.path; // Path of the uploaded profile picture
 
-        // Update the user's profile picture path in the database
-        await db('users').where('id', userId).update({ profile_pic_path: profilePicPath });
+//         // Update the user's profile picture path in the database
+//         await db('users').where('id', userId).update({ profile_pic_path: profilePicPath });
 
-        res.status(200).json({ message: 'Profile picture uploaded successfully' });
-    } catch (error) {
-        console.error('Error uploading profile picture:', error);
-        res.status(500).json({ error: 'Internal server error' });
-    }
-});
+//         res.status(200).json({ message: 'Profile picture uploaded successfully' });
+//     } catch (error) {
+//         console.error('Error uploading profile picture:', error);
+//         res.status(500).json({ error: 'Internal server error' });
+//     }
+// });
 
 // Initialize multer with the storage configuration
 const upload = multer({ storage: storage });
