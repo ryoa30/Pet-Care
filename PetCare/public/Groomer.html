@@ -1,0 +1,168 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="./CSS/groomer.css" />
+    <link
+      rel="shortcut icon"
+      href="../Assets/Logo-PetCare.png"
+      type="image/x-icon"
+    />
+    <title>PetCare</title>
+  </head>
+  <body>
+    <nav>
+      <div class="Logo-Petcare">
+        <img src="../Assets/Logo-PetCare.png" alt="" />
+      </div>
+      <ul>
+        <li><a href="/Aboutus">About Us</a></li>
+        <li class="dropdown">
+          <a href="" class="dropbtn">Services</a>
+          <div class="dropdown-content">
+            <a href="/Groomer">Groomer</a>
+            <a href="/Vet">Vet</a>
+          </div>
+        </li>
+        <li><a href="#Contact-us">Contact Us</a></li>
+        <img
+          src="../Assets/Profile-logo.png"
+          onclick="pindahhalaman('/profile')"
+          alt=""
+          id="profilelogo"
+        />
+      </ul>
+      <!--Untuk responsive menu navbar-->
+      <div class="garis-tiga">
+        <input type="checkbox" />
+        <span></span>
+        <span></span>
+        <span></span>
+      </div>
+    </nav>
+
+    <div class="Groomer">
+      <h1>Choose Your Groomer</h1>
+      <p>
+        Meet the groomer who is ready to help you care for your pet without
+        <br />
+        having to wait in line and travel long distances
+      </p>
+    </div>
+
+    <div class="Card-Groomer">
+      <!--Groomer 1-->
+      <div class="Groomer-profile">
+        <div class="Groomer-picture">
+          <img src="./Assets/kuchjastin.jpg" alt="" />
+        </div>
+        <div class="Groomer-text">
+          <h3>Justinus Lhaksana</h3>
+          <p>4.8 / 5</p>
+          <button class="See-more">See more</button>
+        </div>
+      </div>
+      <!--Groomer 2-->
+      <div class="Groomer-profile">
+        <div class="Groomer-picture">
+          <img src="./Assets/kuchjastin.jpg" alt="" />
+        </div>
+        <div class="Groomer-text">
+          <h3>Justinus Lhaksana</h3>
+          <p>4.8 / 5</p>
+          <button class="See-more">See more</button>
+        </div>
+      </div>
+      <!--Groomer 3-->
+      <div class="Groomer-profile">
+        <div class="Groomer-picture">
+          <img src="./Assets/kuchjastin.jpg" alt="" />
+        </div>
+        <div class="Groomer-text">
+          <h3>Justinus Lhaksana</h3>
+          <p>4.8 / 5</p>
+          <button class="See-more">See more</button>
+        </div>
+      </div>
+      <!--Groomer 4-->
+      <div class="Groomer-profile">
+        <div class="Groomer-picture">
+          <img src="./Assets/kuchjastin.jpg" alt="" />
+        </div>
+        <div class="Groomer-text">
+          <h3>Justinus Lhaksana</h3>
+          <p>4.8 / 5</p>
+          <button class="See-more">See more</button>
+        </div>
+      </div>
+      <!--Groomer 4-->
+      <div class="Groomer-profile">
+        <div class="Groomer-picture">
+          <img src="./Assets/kuchjastin.jpg" alt="" />
+        </div>
+        <div class="Groomer-text">
+          <h3>Justinus Lhaksana</h3>
+          <p>4.8 / 5</p>
+          <button class="See-more">See more</button>
+        </div>
+      </div>
+      <!--Groomer 4-->
+      <div class="Groomer-profile">
+        <div class="Groomer-picture">
+          <img src="./Assets/kuchjastin.jpg" alt="" />
+        </div>
+        <div class="Groomer-text">
+          <h3>Justinus Lhaksana</h3>
+          <p>4.8 / 5</p>
+          <button class="See-more">See more</button>
+        </div>
+      </div>
+    </div>
+
+    <!-- Pop-up Modal -->
+    <div id="myModal" class="modal">
+      <div class="modal-content">
+        <span class="close">&times;</span>
+        <div class="img-pop">
+          <img src="./Assets/kuchjastin.jpg" alt="" />
+        </div>
+        <div class="text-pop">
+          <h1>Justinus Lhaksana</h1>
+          <h2>Description</h2>
+          <p>
+            Experienced in grooming industries for 2 <br>years. Able to bathe and
+            groom for dogs <br>and cats.
+          </p>
+          <h2>Scheduling</h2>
+          <p>Available on: Everyday 24/7</p>
+          <div class="pop-button">
+            <button>08:00</button>
+            <button>10:00</button>
+            <button>12:00</button>
+            <button>14:00</button>
+          </div>
+          <h2>Price: Rp. 80.000</h2>
+          <button class="Btn-book">Book</button>
+        </div>
+      </div>
+    </div>
+
+    <footer>
+      <div class="Message-Website">
+        <div class="footer-text">
+          <p>
+            Find out more about <span class="pet-care">Pet Care</span> in our
+            socials
+          </p>
+        </div>
+        <div class="footer-icon"></div>
+      </div>
+      <div class="Designed-footer">
+        <p>Copyright &copy;2024 Pet Care</p>
+      </div>
+    </footer>
+
+    <script src="../JS/index.js"></script>
+  </body>
+</html>

@@ -14,6 +14,12 @@ const db = knex({
         port: '5432'
     }
 })
+
+const app = express();
+
+// Serve static files from the 'uploads' folder
+app.use('/uploads', express.static(path.join(__dirname, 'uploads')));
+
 db.raw('SELECT 1')
   .then(result => {
     console.log('Database connection established!');
@@ -27,40 +33,63 @@ db.raw('SELECT 1')
     //     console.error('Error fetching user name:', err);
     // });
     
-const app = express();
+// const app = express();
 
 let initialPath = path.join(__dirname, "PetCare/public");
 
+const app = express();
+
+// Serve static files from the 'public' directory
+const publicPath = path.join(__dirname, 'PetCare', 'public');
+
+app.use(express.static(publicPath));
+
 app.use(bodyParser.json());
-app.use(express.static(initialPath));
+// app.use(express.static(initialPath));
 
 const storage = multer.diskStorage({
     destination: function (req, file, cb) {
-        cb(null, 'uploads'); // Destination folder for uploaded files
+        cb(null, path.join(publicPath, 'uploads')); // Destination folder for uploaded files
     },
     filename: function (req, file, cb) {
-        cb(null, file.originalname); // Use original filename
+        cb(null, Date.now() + '-' + file.originalname); // Use timestamp + original filename
     }
 });
 
-// app.post('/upload-profile-pic', upload.single('profilePic'), async (req, res) => {
-//     try {
-//         // Extract necessary information from the request
-//         const userId = req.body.userId; // Assuming you have a userId associated with the uploaded profile picture
-//         const profilePicPath = req.file.path; // Path of the uploaded profile picture
-
-//         // Update the user's profile picture path in the database
-//         await db('users').where('id', userId).update({ profile_pic_path: profilePicPath });
-
-//         res.status(200).json({ message: 'Profile picture uploaded successfully' });
-//     } catch (error) {
-//         console.error('Error uploading profile picture:', error);
-//         res.status(500).json({ error: 'Internal server error' });
-//     }
-// });
-
 // Initialize multer with the storage configuration
 const upload = multer({ storage: storage });
+
+app.post('/upload-profile-pic', upload.single('profilePic'), async (req, res) => {
+    try {
+        const userId = req.body.userId; // Assuming you have a userId associated with the uploaded profile picture
+        const profilePicPath = req.file.filename; // Path of the uploaded profile picture
+
+        await db('users').where('id', userId).update({ profile_pic_path: profilePicPath });
+
+        res.status(200).json({ message: 'Profile picture uploaded successfully', path: profilePicPath });
+    } catch (error) {
+        console.error('Error uploading profile picture:', error);
+        res.status(500).json({ error: 'Internal server error' });
+    }
+});
+
+app.post('/upload-groom-certificate', upload.single('certificate'), async (req, res) => {
+    try {
+        // Get user id from the request body
+        const userId = req.body.userId;
+        
+        // Create a new groomer and associate it with the user
+        const newGroomerId = await db('groomers').insert({
+            userid: userId,
+            certificate_path: req.file.filename
+        }).returning('id');
+
+        res.status(200).json({ message: 'Groomer certificate uploaded successfully', groomerId: newGroomerId[0] });
+    } catch (error) {
+        console.error('Error uploading groomer certificate:', error);
+        res.status(500).json({ error: 'Internal server error' });
+    }
+});
 
 app.get('/', (req, res) =>{
     res.sendFile(path.join(initialPath, "index.html"));
@@ -93,6 +122,16 @@ app.get('/Aboutus', (req, res) =>{
 })
 app.get('/Aboutusindex', (req, res) =>{
     res.sendFile(path.join(initialPath, "Aboutusindex.html"));
+})
+app.get('/Groomer', (req, res) =>{
+    res.sendFile(path.join(initialPath, "Groomer.html"));
+})
+app.get('/Vet', (req, res) =>{
+    res.sendFile(path.join(initialPath, "Vet.html"));
+})
+
+app.get('/Edit', (req, res) =>{
+    res.sendFile(path.join(initialPath, "Editservice.html"));
 })
 
 // server.js

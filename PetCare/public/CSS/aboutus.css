@@ -1,0 +1,290 @@
+body{
+    margin: 0;
+    padding: 0;
+    overflow-x: hidden;
+}
+
+nav{
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        padding: 1.4rem 7%;
+        height: 40px;
+        background-color: #FBA834;
+        color: white;
+        border-bottom: 1px;
+        position: fixed;
+        top: 0;
+        left: 0;
+        right: 0;
+        z-index: 999;
+}
+
+.Logo-Petcare img{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+   width: 200px;
+   cursor: pointer;
+}
+
+#profilelogo:hover{
+    cursor: pointer;
+}
+
+nav ul{
+    display: flex;
+    justify-content: space-between;
+    list-style: none;
+}
+
+nav ul li a {
+    display: block;
+    margin-top: 30px;
+    text-decoration: none;
+    color: black;
+    font-size: 24px;
+}
+
+nav ul li a:hover{
+    outline: black solid 2px;
+    border-radius: 15px;
+    padding: 6px;
+    transition: 0.2s ease-in-out;
+}
+
+.dropdown {
+    position: relative;
+    display: inline-block;
+}
+
+.dropdown-content {
+    display: none;
+    position: absolute;
+    background-color: #FBA834;
+    min-width: 140px;
+    box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+    z-index: 1;
+}
+
+.dropdown-content a {
+    color: black;
+    padding: 12px 16px;
+    text-decoration: none;
+    display: block;
+}
+
+.dropdown-content a:hover {
+    background-color: #FBA834;
+    text-align: center;
+}
+
+.dropdown:hover .dropdown-content {
+    display: block;
+}
+
+.Background-Welcome{
+    padding: 50px 0 0 0;
+    margin-top: 80px;
+    height: 35vh;
+    text-align: center;
+    background-image: url(../Assets/Homepage-Gmbr.png);
+    background-size: cover;
+    color: white;
+}
+
+.Background-Welcome h1{
+    font-size: 50px;
+}
+
+.Line{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-top: 20px;
+    margin-bottom: 20px;
+}
+
+#Line-9{
+    width: 300px;
+    text-align: center;
+}
+
+.Isi-Inti{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-bottom: 20px;
+}
+
+.Inti{
+    margin:auto;
+    text-align: center;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.Inti .Info{
+    display: grid;
+    place-items: center;
+    margin-right: 100px;
+}
+
+.Inti .Info h1{
+   color: #091155;
+   font-weight: bolder;
+}
+
+.Inti .Info .Pet{
+    color: #091155;
+    font-weight: bolder;
+}
+
+.Inti .Gambar{
+    margin-left: 100px;
+}
+
+.who{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.who .who-inti h1{
+    color: #091155;
+    font-weight: bolder;
+}
+
+.who .who-inti .Pet{
+    color: #091155;
+    font-weight: bolder;
+}
+
+footer{
+    position: absolute;
+    right: 0;
+    left: 0;
+    bottom: 20;
+    text-align: center;
+    z-index: 999;
+}
+
+.Message-Website{
+    height: 120px;
+    background-color: #FBA834;
+    display: grid;
+    place-items: center;
+}
+
+.footer-text{
+    color: white;
+}
+
+.pet-care{
+    color: black;
+}
+
+.Message-Website .footer-icon img{
+    background-color: #FBA834;
+    padding-bottom: 20px;
+}
+
+.Designed-footer{
+    display: grid;
+    place-items: center;
+    height: 50px;
+    background-color: black;
+    color: white;
+}
+
+
+.garis-tiga{
+    display: none;
+    flex-direction: column;
+    height: 20px;
+    justify-content: space-between;
+    position: relative;
+    cursor: pointer;
+    z-index: 99;
+}
+
+.garis-tiga input{
+    position: absolute;
+    width: 40px;
+    height: 28px;
+    left: -5px;
+    top: -3px;
+    opacity: 0;
+    z-index: 999;
+    cursor: pointer;
+} 
+
+.garis-tiga span{
+    display: block;
+    width: 28px;
+    height: 3px;
+    background-color: white;
+    border-radius: 3px;
+    transition: 1s;
+}
+
+.garis-tiga span:nth-child(2){
+    transform-origin: 0 0;
+}
+
+.garis-tiga span:nth-child(4){
+    transform-origin: 0 100%;
+}
+
+.garis-tiga input:checked ~ span:nth-child(2){
+    transform: rotate(45deg) translate(-1px, -1px);
+}
+
+.garis-tiga input:checked ~ span:nth-child(3){
+    opacity: 0;
+    transform: scale(0);
+}
+
+.garis-tiga input:checked ~ span:nth-child(4){
+    transform: rotate(-45deg) translate(-1px, 0px);
+}
+
+/*Responsive tools Tablet*/
+@media screen and (min-width: 768px){
+    nav ul{
+        width: 50%;
+    }
+}
+
+/*Responsive tools Hp*/
+@media screen and (max-width: 768px){
+    .garis-tiga{
+        display: flex;
+    }
+    nav ul{
+        position: absolute;
+        right: 0;
+        top: 0;
+        width: 100%;
+        height: 100vh;
+        justify-content: space-evenly;
+        flex-direction: column;
+        align-items: center;
+        z-index: -1;
+        background-color: #FBA834;
+        transition: all .2s;
+        transform: translateX(100%);
+        opacity: 0;
+
+    }
+    nav ul.muncul-responsive{
+        opacity: 1;
+        transform: translateX(0);
+    }
+
+    .Background-Welcome h1{
+        font-size: 48px;
+    }
+
+}

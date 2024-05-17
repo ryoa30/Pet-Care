@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="../CSS/profile.css">
+    <link rel="shortcut icon" href="../Assets/Logo-PetCare.png" type="image/x-icon">
+    <title>PetCare</title>
+</head>
+
+<body>
+    <nav>
+        <div class="Logo-Petcare">
+            <img src="../Assets/Logo-PetCare.png" onclick="pindahhalaman('/homepage')" alt="">
+        </div>
+        <ul>
+            <li><a href="/Aboutus">About Us</a></li>
+            <li class="dropdown">
+                <a href="" class="dropbtn">Services</a>
+                <div class="dropdown-content">
+                    <a href="/Groomer">Groomer</a>
+                    <a href="/Vet">Vet</a>
+                </div>
+            </li>
+            <li><a href="">Contact Us</a></li>
+            <img src="../Assets/Profile-logo.png" alt="">
+        </ul>
+        <!--Untuk responsive menu navbar-->
+        <div class="garis-tiga">
+            <input type="checkbox" />
+            <span></span>
+            <span></span>
+            <span></span>
+        </div>
+    </nav>
+
+    <div class="pop-up" id="pop-up">
+        <h1>You have been logged out</h1>
+        <button type="button" id="Ok"  onclick="closepopup()">OK</button>
+    </div> 
+
+    <div class="container">
+        <div class="profile-picture">
+            <div class="picture">
+                <img src="/uploads/Profile-blank.png" alt="profile pic" id="profile-pic">
+                <label for="input-file">Edit Profile</label>
+                <input type="file" name="" accept="image/jpeg, image/png, image/jpg"  id="input-file">
+                <button type="button" id="logout" onclick="openpopup()">Log Out</button>
+            </div>
+            <form action="#">
+                <h1>Profile</h1>
+                <div class="input-box">
+                    <label for="">Name</label>
+                    <input type="text" name="nama" id="name">
+                </div>
+                <div class="input-box">
+                    <label for="">Email</label>
+                    <input type="email" name="email" id="email">
+                </div>
+                <div class="input-box">
+                    <label for="">Phone Number</label>
+                    <input type="text" name="nohp" id="phonenumber">
+                </div>
+                <div class="input-box">
+                    <label for="">Gender</label>
+                    <select name="gender" id="gender">
+                        <option value="empty"></option>
+                        <option value="Male">Male</option>
+                        <option value="Female">Female</option>
+                    </select>
+                </div>
+                <div class="input-box">
+                    <label for="">Date Of Birth</label>
+                    <input type="date" name="date" id="date">
+                </div>
+                <div class="button-box">
+                    <button type="button" class="Vet" onclick="pindahhalaman('/regisvet')">Register As a Vet</button>
+                    <button type="button" class="Groom" onclick="pindahhalaman('/regisgroom')">Register As a Groomer</button>
+                    <button type="button" class="Edit" onclick="pindahhalaman('/editservice')">Edit Service</button>
+                    <button type="button" class="Save">SAVE</button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <footer>
+        <div class="Message-Website">
+            <div class="footer-text">
+                <p>Find out more about <span class="pet-care">Pet Care</span> in our socials</p>
+            </div>
+            <div class="footer-icon">
+
+            </div>
+        </div>
+        <div class="Designed-footer">
+            <p>Copyright &copy;2024 Pet Care</p>
+        </div>
+    </footer>
+
+    <!-- JavaScript -->
+    <script src="../JS/index.js"></script>
+    <script src="../JS/profileuser.js"></script>
+</body>
+
+</html>
