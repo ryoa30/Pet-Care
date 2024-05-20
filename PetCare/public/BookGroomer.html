@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="./CSS/bookgroom.css" />
+    <link
+      rel="shortcut icon"
+      href="../Assets/Logo-PetCare.png"
+      type="image/x-icon"
+    />
+    <title>PetCare</title>
+  </head>
+  <body>
+    <nav>
+      <div class="Logo-Petcare">
+        <img src="../Assets/Logo-PetCare.png" alt="" />
+      </div>
+      <ul>
+        <li><a href="/Aboutus">About Us</a></li>
+        <li class="dropdown">
+          <a href="" class="dropbtn">Services</a>
+          <div class="dropdown-content">
+            <a href="/Groomer">Groomer</a>
+            <a href="/Vet">Vet</a>
+          </div>
+        </li>
+        <li><a href="#Contact-us">Contact Us</a></li>
+        <img
+          src="../Assets/Profile-logo.png"
+          onclick="pindahhalaman('/profile')"
+          alt=""
+          id="profilelogo"
+        />
+      </ul>
+      <!--Untuk responsive menu navbar-->
+      <div class="garis-tiga">
+        <input type="checkbox" />
+        <span></span>
+        <span></span>
+        <span></span>
+      </div>
+    </nav>
+
+    <div class="header">
+      <div class="back-arrow">&#x2190;</div>
+      <h1 class="page-title">Booking Groomer</h1>
+  </div>
+
+  <div class="booking-container">
+      <div class="booking-card">
+          <img src="./Assets/kuchjastin.jpg" alt="Groomer Image" class="groomer-image">
+          <div class="groomer-info">
+              <h2 class="groomer-name">Cimol</h2>
+              <div class="booking-options">
+                  <div class="option">
+                      <span>Size:</span>
+                      <button class="size-btn">Small</button>
+                      <button class="size-btn">Regular</button>
+                      <button class="size-btn">Big</button>
+                  </div>
+                  <div class="option">
+                      <span>Time:</span>
+                      <button class="time-btn">08:00</button>
+                      <button class="time-btn">10:00</button>
+                      <button class="time-btn">12:00</button>
+                      <button class="time-btn">14:00</button>
+                  </div>
+                  <div class="option">
+                      <label for="calendar">Kalender</label>
+                      <input type="date" id="calendar">
+                  </div>
+                  <div class="option">
+                      <label for="address">Address</label>
+                      <input type="text" id="address" placeholder="Type here...">
+                  </div>
+                  <div class="option">
+                      <label for="note">Note</label>
+                      <input type="text" id="note" placeholder="Type here...">
+                  </div>
+              </div>
+              <button class="book-btn">Book</button>
+          </div>
+      </div>
+  </div>
+    <!-- JavaScript -->
+    <script src="../JS/index.js"></script>
+  </body>
+</html>

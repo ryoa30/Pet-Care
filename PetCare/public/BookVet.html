@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="./CSS/bookvet.css" />
+    <link
+      rel="shortcut icon"
+      href="../Assets/Logo-PetCare.png"
+      type="image/x-icon"
+    />
+    <title>PetCare</title>
+</head>
+<body>
+  <nav>
+    <div class="Logo-Petcare">
+        <img src="../Assets/Logo-PetCare.png"  alt="">
+    </div>
+    <ul>
+        <li><a href="/Aboutus">About Us</a></li>
+        <li class="dropdown">
+            <a href="" class="dropbtn">Services</a>
+            <div class="dropdown-content">
+                <a href="/Groomer">Groomer</a>
+                <a href="/Vet">Vet</a>
+            </div>
+        </li>
+        <li><a href="#Contact-us">Contact Us</a></li>
+        <img src="../Assets/Profile-logo.png" onclick="pindahhalaman('/profile')"  alt="" id="profilelogo">
+    </ul>
+    <!--Untuk responsive menu navbar-->
+    <div class="garis-tiga">
+        <input type="checkbox" />
+        <span></span>
+        <span></span>
+        <span></span>
+    </div>
+</nav>
+
+
+  <!-- JavaScript -->
+  <script src="../JS/index.js"></script>
+</body>
+</html>

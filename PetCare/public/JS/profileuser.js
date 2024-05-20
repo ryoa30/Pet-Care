@@ -74,7 +74,7 @@ window.onload = async function() {
 
           if(userData.status == 1){
             document.querySelector('.Edit').style.display = 'none';
-          }else{
+          }else if(userData.status == 2 || userData.status == 3){
             document.querySelector('.Vet').style.display = 'none';
             document.querySelector('.Groom').style.display = 'none';
             document.querySelector('.Edit').style.display = 'block';

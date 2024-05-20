@@ -129,7 +129,12 @@ app.get('/Groomer', (req, res) =>{
 app.get('/Vet', (req, res) =>{
     res.sendFile(path.join(initialPath, "Vet.html"));
 })
-
+app.get('/BookGroomer', (req, res) =>{
+    res.sendFile(path.join(initialPath, "BookGroomer.html"));
+})
+app.get('/BookVet', (req, res) =>{
+    res.sendFile(path.join(initialPath, "BookVet.html"));
+})
 app.get('/Edit', (req, res) =>{
     res.sendFile(path.join(initialPath, "Editservice.html"));
 })
