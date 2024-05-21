@@ -103,10 +103,15 @@ nav ul li a:hover{
     margin-right: 200px;
 }
 
+.back-button{
+    color: #ffff;
+}
+
 .back-arrow {
     font-size: 24px;
     cursor: pointer;
     margin-right: 10px;
+    color: #000;
 }
 
 .page-title {

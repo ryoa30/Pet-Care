@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link
+      rel="shortcut icon"
+      href="../Assets/Logo-PetCare.png"
+      type="image/x-icon"
+    />
+    <title>PetCare</title>
+    <link rel="stylesheet" href="../CSS/editservice.css">
+  </head>
+  <body>
+    <nav>
+        <div class="Logo-Petcare">
+            <img src="../Assets/Logo-PetCare.png" onclick="pindahhalaman('/homepage')" alt="">
+        </div>
+        <ul>
+            <li><a href="/Aboutus">About Us</a></li>
+            <li class="dropdown">
+                <a href="" class="dropbtn">Services</a>
+                <div class="dropdown-content">
+                    <a href="/Groomer">Groomer</a>
+                    <a href="/Vet">Vet</a>
+                </div>
+            </li>
+            <li><a href="">Contact Us</a></li>
+            <img src="../Assets/Profile-logo.png" alt="">
+        </ul>
+        <!--Untuk responsive menu navbar-->
+        <div class="garis-tiga">
+            <input type="checkbox" />
+            <span></span>
+            <span></span>
+            <span></span>
+        </div>
+    </nav>
+
+    <div class="container">
+        <div class="scheduling">
+            <label for="scheduling">Description</label>
+            <input type="text" id="scheduling" placeholder="available on...">
+        </div>
+        <div class="scheduling">
+            <label for="scheduling">Scheduling</label>
+            <input type="text" id="scheduling" placeholder="available on...">
+            <div class="times">
+                <button>08:00</button>
+                <button>10:00</button>
+                <button>12:00</button>
+                <button>14:00</button>
+                <button>16:00</button>
+            </div>
+        </div>
+        <div class="price">
+            <label for="price">Price</label>
+            <input type="text" id="price" placeholder="How much is the price for your service?">
+        </div>
+        <div class="actions">
+            <button class="cancel">Cancel</button>
+            <button class="save">Save</button>
+            <button type="button" id="logout" onclick="openpopup()">Log Out</button>
+        </div>
+    </div>
+
+
+
+     <!-- JavaScript -->
+     <script src="../JS/index.js"></script>
+     <script src="../JS/profileuser.js"></script>
+  </body>
+</html>

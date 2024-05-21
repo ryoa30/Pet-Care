@@ -118,7 +118,7 @@ nav ul li a:hover{
     width:300px;
     height: 400px;
     background-color: white;
-    margin:auto;
+    margin: auto;
     color: white;
     box-shadow: 10px 10px 10px black;
     text-align: center;
@@ -129,6 +129,7 @@ nav ul li a:hover{
 .Groomer-picture img{
     width: 100%;
     border-radius: 30px;
+    height: 15vw;
 }
 
 .Groomer-text{
@@ -211,6 +212,10 @@ footer {
     color: white;
 }
 
+.modal-content .img-pop img{
+    width: 800px;
+}
+
 .modal-content .text-pop .pop-button{
     margin: auto;
 }
@@ -238,6 +243,7 @@ footer {
     border-radius: 20px;
     text-align: center;
     font-size: 16px;
+    margin-top: 30px;
 }
 .close {
     color: #aaa;
@@ -252,7 +258,6 @@ footer {
     text-decoration: none;
     cursor: pointer;
 }
-
 
 
 .garis-tiga{

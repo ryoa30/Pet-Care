@@ -14,7 +14,11 @@
   <body>
     <nav>
       <div class="Logo-Petcare">
-        <img src="../Assets/Logo-PetCare.png" alt="" />
+        <img
+        src="../Assets/Logo-PetCare.png"
+        onclick="pindahhalaman('/homepage')"
+        alt=""
+      />
       </div>
       <ul>
         <li><a href="/Aboutus">About Us</a></li>
@@ -52,73 +56,9 @@
     </div>
 
     <div class="Card-Groomer">
-      <!--Groomer 1-->
-      <div class="Groomer-profile">
-        <div class="Groomer-picture">
-          <img src="./Assets/kuchjastin.jpg" alt="" />
-        </div>
-        <div class="Groomer-text">
-          <h3>Justinus Lhaksana</h3>
-          <p>4.8 / 5</p>
-          <button class="See-more">See more</button>
-        </div>
-      </div>
-      <!--Groomer 2-->
-      <div class="Groomer-profile">
-        <div class="Groomer-picture">
-          <img src="./Assets/kuchjastin.jpg" alt="" />
-        </div>
-        <div class="Groomer-text">
-          <h3>Justinus Lhaksana</h3>
-          <p>4.8 / 5</p>
-          <button class="See-more">See more</button>
-        </div>
-      </div>
-      <!--Groomer 3-->
-      <div class="Groomer-profile">
-        <div class="Groomer-picture">
-          <img src="./Assets/kuchjastin.jpg" alt="" />
-        </div>
-        <div class="Groomer-text">
-          <h3>Justinus Lhaksana</h3>
-          <p>4.8 / 5</p>
-          <button class="See-more">See more</button>
-        </div>
-      </div>
-      <!--Groomer 4-->
-      <div class="Groomer-profile">
-        <div class="Groomer-picture">
-          <img src="./Assets/kuchjastin.jpg" alt="" />
-        </div>
-        <div class="Groomer-text">
-          <h3>Justinus Lhaksana</h3>
-          <p>4.8 / 5</p>
-          <button class="See-more">See more</button>
-        </div>
-      </div>
-      <!--Groomer 4-->
-      <div class="Groomer-profile">
-        <div class="Groomer-picture">
-          <img src="./Assets/kuchjastin.jpg" alt="" />
-        </div>
-        <div class="Groomer-text">
-          <h3>Justinus Lhaksana</h3>
-          <p>4.8 / 5</p>
-          <button class="See-more">See more</button>
-        </div>
-      </div>
-      <!--Groomer 4-->
-      <div class="Groomer-profile">
-        <div class="Groomer-picture">
-          <img src="./Assets/kuchjastin.jpg" alt="" />
-        </div>
-        <div class="Groomer-text">
-          <h3>Justinus Lhaksana</h3>
-          <p>4.8 / 5</p>
-          <button class="See-more">See more</button>
-        </div>
-      </div>
+      <!--Sesuai dengan JS-->
     </div>
+
 
     <!-- Pop-up Modal -->
     <div id="myModal" class="modal">
@@ -141,6 +81,7 @@
             <button>10:00</button>
             <button>12:00</button>
             <button>14:00</button>
+            <button>16:00</button>
           </div>
           <h2>Price: Rp. 80.000</h2>
           <button class="Btn-book" onclick="pindahhalaman('/BookGroomer')">Book</button>
@@ -164,5 +105,6 @@
     </footer>
 
     <script src="../JS/index.js"></script>
+    <script src="../JS/groomer.js"></script>
   </body>
 </html>

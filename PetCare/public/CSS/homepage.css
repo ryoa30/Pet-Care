@@ -189,7 +189,16 @@ footer{
     text-align: center;
     z-index: 99;
 }
-
+.social-icon{
+    margin-left: 30px;
+    width: 30px;
+    height: 30px;
+}
+.footer-icon{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
 .Message-Website{
     height: 120px;
     background-color: #FBA834;

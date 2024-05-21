@@ -41,6 +41,7 @@ const app = express();
 
 // Serve static files from the 'public' directory
 const publicPath = path.join(__dirname, 'PetCare', 'public');
+app.use(express.static(publicPath));
 
 app.use(express.static(publicPath));
 
@@ -81,8 +82,16 @@ app.post('/upload-groom-certificate', upload.single('certificate'), async (req, 
         // Create a new groomer and associate it with the user
         const newGroomerId = await db('groomers').insert({
             userid: userId,
-            certificate_path: req.file.filename
+            certificate_path: req.file.filename,
+            description: "-",
+            price: 0
         }).returning('id');
+        console.log("masuk");
+        await db('users')
+            .where('id', userId)
+            .update({
+                status: 2
+        });
 
         res.status(200).json({ message: 'Groomer certificate uploaded successfully', groomerId: newGroomerId[0] });
     } catch (error) {
@@ -141,6 +150,38 @@ app.get('/Edit', (req, res) =>{
 
 // server.js
 
+// Serve static files from the 'uploads' folder
+app.use('/uploads', express.static(path.join(__dirname, 'uploads')));
+
+// Fetch all groomers with user details
+app.get('/api/groomers', async (req, res) => {
+    try {
+        const groomers = await db.select('groomers.id', 'groomers.description', 'groomers.price', 'groomers.userid', 'groomers.rating', 'groomers.scheduling', 'users.name', 'users.profile_pic_path')
+                                 .from('groomers')
+                                 .join('users', 'groomers.userid', 'users.id');
+        res.json(groomers);
+    } catch (error) {
+        console.error('Error fetching groomers:', error);
+        res.status(500).json({ error: 'Internal server error' });
+    }
+});
+
+// Fetch single groomer details
+app.get('/api/groomers/:id', async (req, res) => {
+    const { id } = req.params;
+    try {
+        const groomer = await db.select('groomers.id', 'groomers.description', 'groomers.price', 'groomers.userid', 'groomers.rating', 'groomers.scheduling', 'users.name', 'users.profile_pic_path')
+                                .from('groomers')
+                                .join('users', 'groomers.userid', 'users.id')
+                                .where('groomers.id', id)
+                                .first();
+        res.json(groomer);
+    } catch (error) {
+        console.error('Error fetching groomer details:', error);
+        res.status(500).json({ error: 'Internal server error' });
+    }
+});
+
 // Route to handle updating user data
 app.post('/update-user', async (req, res) => {
     const { id, email, name, dob, gender, phone } = req.body;
@@ -173,7 +214,8 @@ app.post('/register-user', (req, res) => {
         dob: date,
         gender: gender,
         phone: phone,
-        status: 1
+        status: 1,
+        profile_pic_path: "Profile-blank.png"
     })
     .returning(["name", "email"])
     .then(data => {
@@ -219,6 +261,7 @@ app.get('/user/:name', async (req, res) => {
         res.status(500).json({ error: 'Internal server error' });
     }
 });
+
 
 
 app.listen(3000, (req, res) => {
