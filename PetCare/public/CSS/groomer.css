@@ -228,6 +228,7 @@ footer {
     border-radius: 30px;
     gap: 30px;
     cursor: pointer;
+    margin: 5px 5px 5px 5px;
 }
 
 .modal-content .text-pop .pop-button button:hover{

@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="./CSS/livechat.css" />
+    <link
+      rel="shortcut icon"
+      href="../Assets/Logo-PetCare.png"
+      type="image/x-icon"
+    />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" integrity="sha384-k6RqeWeci5ZR/Lv4MR0sA0FfDOM9KK1l4eYaaxBiG1Sw3SnGZ+VoQw51Jyf6M/v1" crossorigin="anonymous">
+    <title>PetCare</title>
+</head>
+<body>
+    <div class="chat-header">
+        <img src="./Assets/fotovet.jpg" alt="Avatar" class="avatar">
+        <div class="user-info">
+            <div class="username">Dr. Jeffrey</div>
+            <div class="status">Online</div>
+        </div>
+    </div>
+    <div class="chat-container">
+        <div class="chat-box" id="chat-box">
+            <!-- Messages will be appended here -->
+        </div>
+        <form id="chat-form">
+            <select id="user-select">
+                <option value="user1">User</option>
+                <option value="user2">Dr.Vincent</option>
+            </select>
+            <input type="text" id="message-input" placeholder="Ketik pesan di sini" required>
+            <button type="submit" class="send-button">Send</button>
+        </form>
+    </div>
+
+    <script src="./JS/livechat.js"></script>
+</body>
+</html>

@@ -32,6 +32,12 @@ function showGroomerModal(groomerId) {
             const modal = document.getElementById('myModal');
             const modalContent = modal.querySelector('.modal-content');
 
+            console.log(groomer);
+            let scheduleButtons = '';
+            groomer.schedules.forEach(schedule => {
+                scheduleButtons += `<button>${schedule.availibletime}</button>`;
+            });
+
             modalContent.innerHTML = `
                 <span class="close" onclick="closeModal()">&times;</span>
                 <div class="img-pop">
@@ -44,18 +50,16 @@ function showGroomerModal(groomerId) {
                     <h2>Scheduling</h2>
                     <p>Available on: ${groomer.scheduling}</p>
                     <div class="pop-button">
-                        <button>08:00</button>
-                        <button>10:00</button>
-                        <button>12:00</button>
-                        <button>14:00</button>
-                        <button>16:00</button>
+                        ${scheduleButtons}
                     </div>
                     <h2>Price: Rp. ${groomer.price}</h2>
-                    <button class="Btn-book" onclick="pindahhalaman('/BookGroomer')">Book</button>
+                    <button class="Btn-book" onclick="pindahhalaman('/BookGroomer?groomerId=${groomerId})">Book</button>
                 </div>
             `;
 
+            document.getElementById('footer').style.display = 'none';
             modal.style.display = 'block';
+            
         })
         .catch(error => console.error('Error fetching groomer details:', error));
 }
@@ -63,4 +67,5 @@ function showGroomerModal(groomerId) {
 function closeModal() {
     const modal = document.getElementById('myModal');
     modal.style.display = 'none';
+    document.getElementById('footer').style.display = 'block';
 }

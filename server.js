@@ -147,6 +147,9 @@ app.get('/BookVet', (req, res) =>{
 app.get('/Edit', (req, res) =>{
     res.sendFile(path.join(initialPath, "Editservice.html"));
 })
+app.get('/LiveChat', (req, res) =>{
+    res.sendFile(path.join(initialPath, "LiveChat.html"));
+})
 
 // server.js
 
@@ -175,7 +178,11 @@ app.get('/api/groomers/:id', async (req, res) => {
                                 .join('users', 'groomers.userid', 'users.id')
                                 .where('groomers.id', id)
                                 .first();
-        res.json(groomer);
+        const schedules = await db.select('availibletime')
+                                  .from('groomerschedule')
+                                  .where('groomerid', id);
+
+        res.json({ ...groomer, schedules });
     } catch (error) {
         console.error('Error fetching groomer details:', error);
         res.status(500).json({ error: 'Internal server error' });

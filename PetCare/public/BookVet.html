@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <link rel="stylesheet" href="./CSS/bookvet.css" />
+    <link rel="stylesheet" href="./CSS/bookgroom.css" />
     <link
       rel="shortcut icon"
       href="../Assets/Logo-PetCare.png"
@@ -37,6 +37,43 @@
     </div>
 </nav>
 
+<div class="header">
+    <a class="back-button" href="/Vet">
+      <div class="back-arrow">&#x2190;</div>
+    </a>
+    <h1 class="page-title">Booking Vet</h1>
+</div>
+
+<div class="booking-container">
+    <div class="booking-card">
+        <img src="./Assets/fotovet.jpg" alt="Groomer Image" class="groomer-image">
+        <div class="groomer-info">
+            <h2 class="groomer-name">Cimol</h2>
+            <div class="booking-options">
+                <div class="option">
+                    <span>Time:</span>
+                    <button class="time-btn">08:00</button>
+                    <button class="time-btn">10:00</button>
+                    <button class="time-btn">12:00</button>
+                    <button class="time-btn">14:00</button>
+                </div>
+                <div class="option">
+                    <label for="calendar">Kalender</label>
+                    <input type="date" id="calendar">
+                </div>
+                <div class="option">
+                    <label for="address">Address</label>
+                    <input type="text" id="address" placeholder="Type here...">
+                </div>
+                <div class="option">
+                    <label for="note">Note</label>
+                    <input type="text" id="note" placeholder="Type here...">
+                </div>
+            </div>
+            <button class="book-btn">Book</button>
+        </div>
+    </div>
+</div>
 
   <!-- JavaScript -->
   <script src="../JS/index.js"></script>
