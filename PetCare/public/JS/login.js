@@ -71,6 +71,7 @@ form.addEventListener("submit", (event) => {
         sessionStorage.name = data.name;
         sessionStorage.email = data.email;
         sessionStorage.id = data.id;
+        sessionStorage.status = data.status;
         openpopup();
         setTimeout(() => {
           closepopup();

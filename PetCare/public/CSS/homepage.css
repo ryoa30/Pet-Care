@@ -143,6 +143,7 @@ nav ul li a:hover{
 .Menu{
     margin:auto;
     text-align: center;
+    cursor: pointer;
 }
 
 .Line .img-1{

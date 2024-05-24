@@ -1,0 +1,196 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="../CSS/orderlist.css" />
+    <link
+      rel="shortcut icon"
+      href="../Assets/Logo-PetCare.png"
+      type="image/x-icon"
+    />
+    <title>PetCare</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+  </head>
+  <body>
+    <nav>
+      <div class="Logo-Petcare">
+        <img
+          src="../Assets/Logo-PetCare.png"
+          onclick="pindahhalaman('/homepage')"
+          alt=""
+        />
+      </div>
+      <ul>
+        <li><a href="/Aboutus">About Us</a></li>
+        <li class="dropdown">
+          <a href="" class="dropbtn">Services</a>
+          <div class="dropdown-content">
+            <a href="/Groomer">Groomer</a>
+            <a href="/Vet">Vet</a>
+          </div>
+        </li>
+        <li><a href="#Contact-us">Contact Us</a></li>
+        <img
+          src="../Assets/Profile-logo.png"
+          onclick="pindahhalaman('/profile')"
+          alt=""
+          id="profilelogo"
+        />
+      </ul>
+      <!--Untuk responsive menu navbar-->
+      <div class="garis-tiga">
+        <input type="checkbox" />
+        <span></span>
+        <span></span>
+        <span></span>
+      </div>
+    </nav>
+
+    <div class="container">
+      <!--My Booking-->
+      <div class="My-History">
+        <h1>My Booking</h1>
+        <div class="booking-section">
+          <div class="date">Hari ini</div>
+          <div class="book-list">
+            <div class="book-info">
+              <h1>Dr. Jeffrey</h1>
+              <p>pasti melayani dengan baik</p>
+            </div>
+            <button class="live-chat-button">Ongoing</button>
+          </div>
+        </div>
+      </div>
+
+      <!--History-->
+      <div class="My-History">
+        <h1>My History</h1>
+        <div class="booking-section">
+          <div class="date">Hari ini</div>
+          <div class="book-list">
+            <div class="book-info">
+              <h1>Dr. Jeffrey</h1>
+              <p>pasti melayani dengan baik</p>
+            </div>
+            <button class="live-chat-button" onclick="openPopup()">Rate</button>
+          </div>
+        </div>
+      </div>
+
+      <!--My Requests-->
+      <div class="My-History">
+        <h1>My Requests</h1>
+        <div class="booking-section">
+          <div class="date">Hari ini</div>
+          <div class="book-list">
+            <div class="book-info">
+              <h1>Dr. Jeffrey</h1>
+              <p>pasti melayani dengan baik</p>
+            </div>
+            <div class="button-acc-rj">
+              <button class="accept-button">Accept</button>
+              <button class="live-chat-button">Reject</button>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!---Ongoing Services-->
+      <div class="My-History">
+        <h1>Ongoing Services</h1>
+        <div class="booking-section">
+          <div class="date">Hari ini</div>
+          <div class="book-list">
+            <div class="book-info">
+              <h1>Nama Jasa</h1>
+              <p>pasti melayani dengan baik</p>
+            </div>
+            <button class="live-chat-button">Done</button>
+          </div>
+        </div>
+      </div>
+
+      <!--My History Vet Groomer-->
+      <div class="My-History">
+        <h1>My History</h1>
+        <div class="booking-section">
+          <div class="date">Hari ini</div>
+          <div class="book-list">
+            <div class="book-info">
+              <h1>Nama Jasa</h1>
+              <p>pasti melayani dengan baik</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <footer id="Contact-us">
+      <div class="Message-Website">
+        <div class="footer-text">
+          <p>
+            Find out more about <span class="pet-care">Pet Care</span> in our
+            socials
+          </p>
+        </div>
+        <div class="footer-icon">
+          <img
+            class="social-icon"
+            src="../Assets/pngwing.com_1.png"
+            alt="facebook"
+          />
+          <img
+            class="social-icon"
+            src="../Assets/pngwing.com_2.png"
+            alt="twitter"
+          />
+          <img
+            class="social-icon"
+            src="../Assets/pngwing.com_8.png"
+            alt="youtube"
+          />
+          <img
+            class="social-icon"
+            src="../Assets/pngwing.com_5.png"
+            alt="google"
+          />
+          <img
+            class="social-icon"
+            src="../Assets/pngwing.com_6.png"
+            alt="instagram"
+          />
+        </div>
+      </div>
+      <div class="Designed-footer">
+        <p>Copyright &copy;2024 Pet Care</p>
+      </div>
+    </footer>
+
+    <!-- Pop-up Rating -->
+    <div id="popup-rating" class="popup">
+        <div class="popup-content">
+            <span class="close" onclick="closePopup()">&times;</span>
+            <div class="popup-header">
+                <img src="./Assets/BG-Login.jpg" alt="Profile Image" class="profile-image">
+                <h2>Cimol</h2>
+            </div>
+            <div class="popup-body">
+                <h3>Rate The Service!</h3>
+                <p>Input Between 1-5</p>
+                <div class="star-rating">
+                    <span class="fa fa-star" data-value="1" onclick="selectStar(this)"></span>
+                    <span class="fa fa-star" data-value="2" onclick="selectStar(this)"></span>
+                    <span class="fa fa-star" data-value="3" onclick="selectStar(this)"></span>
+                    <span class="fa fa-star" data-value="4" onclick="selectStar(this)"></span>
+                    <span class="fa fa-star" data-value="5" onclick="selectStar(this)"></span>
+                </div>
+                <button class="submit-button" onclick="submitRating()">Rate</button>
+            </div>
+        </div>
+    </div>
+
+    <script src="./JS/index.js"></script>
+    <script src="./JS/rating.js"></script>
+  </body>
+</html>

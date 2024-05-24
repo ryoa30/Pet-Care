@@ -150,11 +150,33 @@ app.get('/Edit', (req, res) =>{
 app.get('/LiveChat', (req, res) =>{
     res.sendFile(path.join(initialPath, "LiveChat.html"));
 })
+app.get('/OrderHistory', (req, res) =>{
+    res.sendFile(path.join(initialPath, "Orderlist.html"));
+})
+app.get('/transaction', (req, res) =>{
+    res.sendFile(path.join(initialPath, "transaction.html"));
+})
 
 // server.js
 
 // Serve static files from the 'uploads' folder
 app.use('/uploads', express.static(path.join(__dirname, 'uploads')));
+
+app.get('/api/groomersedit/:userid', async (req, res) => {
+    try {
+        const { userid } = req.params;
+        const groomer = await db.select('groomers.id', 'groomers.description', 'groomers.price', 'groomers.scheduling')
+                                .from('groomers')
+                                .join('users', 'groomers.userid', 'users.id')
+                                .where('users.id', userid)
+                                .first();
+        res.json(groomer);
+    } catch (error) {
+        console.error('Error fetching groomers:', error);
+        res.status(500).json({ error: 'Internal server error' });
+    }
+});
+
 
 // Fetch all groomers with user details
 app.get('/api/groomers', async (req, res) => {
@@ -165,6 +187,17 @@ app.get('/api/groomers', async (req, res) => {
         res.json(groomers);
     } catch (error) {
         console.error('Error fetching groomers:', error);
+        res.status(500).json({ error: 'Internal server error' });
+    }
+});
+
+app.get('/user/:name', async (req, res) => {
+    const { name } = req.params;
+    try {
+        const userData = await db.select('*').from('users').where('name', name).first();
+        res.json(userData);
+    } catch (error) {
+        console.error('Error fetching user data:', error);
         res.status(500).json({ error: 'Internal server error' });
     }
 });
@@ -182,8 +215,8 @@ app.get('/api/groomers/:id', async (req, res) => {
                                   .from('groomerschedule')
                                   .where('groomerid', id);
 
-        res.json({ ...groomer, schedules });
-    } catch (error) {
+                                  res.json({ ...groomer, schedules });
+                                } catch (error) {
         console.error('Error fetching groomer details:', error);
         res.status(500).json({ error: 'Internal server error' });
     }
@@ -239,13 +272,13 @@ app.post('/login-user', async (req, res) => {
     const { email, password } = req.body;
     console.log(password);
 
-    db.select('id','name', 'email')
+    db.select('id','name', 'email', 'status')
     .from('users')
     .where({
         email: email,
         password: password
     })
-    .returning(["id", "name", "email"])
+    .returning(["id", "name", "email", "status"])
     .then(data => {
         if(data.length){
             res.json(data[0]);
@@ -258,16 +291,6 @@ app.post('/login-user', async (req, res) => {
 // server.js
 
 // Add this route to handle fetching user data by name
-app.get('/user/:name', async (req, res) => {
-    const { name } = req.params;
-    try {
-        const userData = await db.select('*').from('users').where('name', name).first();
-        res.json(userData);
-    } catch (error) {
-        console.error('Error fetching user data:', error);
-        res.status(500).json({ error: 'Internal server error' });
-    }
-});
 
 
 

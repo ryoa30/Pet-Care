@@ -40,7 +40,7 @@
     <div class="container">
         <div class="scheduling">
             <label for="scheduling">Description</label>
-            <input type="text" id="scheduling" placeholder="available on...">
+            <input type="text" id="description" placeholder="available on...">
         </div>
         <div class="scheduling">
             <label for="scheduling">Scheduling</label>
@@ -58,7 +58,7 @@
             <input type="text" id="price" placeholder="How much is the price for your service?">
         </div>
         <div class="actions">
-            <button class="cancel">Cancel</button>
+            <button class="cancel" onclick="pindahhalaman('/profile')">Cancel</button>
             <button class="save">Save</button>
             <button type="button" id="logout" onclick="openpopup()">Log Out</button>
         </div>
@@ -73,5 +73,6 @@
      <!-- JavaScript -->
      <script src="../JS/index.js"></script>
      <script src="../JS/profileuser.js"></script>
+     <script src="../JS/editservice.js"></script>
   </body>
 </html>

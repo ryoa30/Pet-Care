@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="../CSS/orderlist.css" />
+    <link
+      rel="shortcut icon"
+      href="../Assets/Logo-PetCare.png"
+      type="image/x-icon"
+    />
+    <title>PetCare</title>
+</head>
+<body>
+    <nav>
+        <div class="Logo-Petcare">
+          <img
+            src="../Assets/Logo-PetCare.png"
+            onclick="pindahhalaman('/homepage')"
+            alt=""
+          />
+        </div>
+        <ul>
+          <li><a href="/Aboutus">About Us</a></li>
+          <li class="dropdown">
+            <a href="" class="dropbtn">Services</a>
+            <div class="dropdown-content">
+              <a href="/Groomer">Groomer</a>
+              <a href="/Vet">Vet</a>
+            </div>
+          </li>
+          <li><a href="#Contact-us">Contact Us</a></li>
+          <img
+            src="../Assets/Profile-logo.png"
+            onclick="pindahhalaman('/profile')"
+            alt=""
+            id="profilelogo"
+          />
+        </ul>
+        <!--Untuk responsive menu navbar-->
+        <div class="garis-tiga">
+          <input type="checkbox" />
+          <span></span>
+          <span></span>
+          <span></span>
+        </div>
+      </nav>
+
+      <div class="container">
+          <div class="My-History">
+            <h1>Bank Transfer</h1>
+            <div class="booking-section">
+              <div class="date">BCA</div>
+              <div class="book-list">
+                <div class="book-info">
+                  <h1>Accout Number : 1234567890 </h1>
+                </div>
+                <button class="live-chat-button">Choose</button>
+              </div>
+            </div>
+            <div class="booking-section">
+              <div class="date">Mandiri</div>
+              <div class="book-list">
+                <div class="book-info">
+                  <h1>Account Number : 9090909090090</h1>
+                </div>
+                <button class="live-chat-button">Choose</button>
+              </div>
+            </div>
+          </div>
+      </div>
+
+      <footer id="Contact-us">
+        <div class="Message-Website">
+          <div class="footer-text">
+            <p>
+              Find out more about <span class="pet-care">Pet Care</span> in our
+              socials
+            </p>
+          </div>
+          <div class="footer-icon">
+            <img
+              class="social-icon"
+              src="../Assets/pngwing.com_1.png"
+              alt="facebook"
+            />
+            <img
+              class="social-icon"
+              src="../Assets/pngwing.com_2.png"
+              alt="twitter"
+            />
+            <img
+              class="social-icon"
+              src="../Assets/pngwing.com_8.png"
+              alt="youtube"
+            />
+            <img
+              class="social-icon"
+              src="../Assets/pngwing.com_5.png"
+              alt="google"
+            />
+            <img
+              class="social-icon"
+              src="../Assets/pngwing.com_6.png"
+              alt="instagram"
+            />
+          </div>
+        </div>
+        <div class="Designed-footer">
+          <p>Copyright &copy;2024 Pet Care</p>
+        </div>
+      </footer>
+
+      <script src="./JS/index.js"></script>
+</body>
+</html>
