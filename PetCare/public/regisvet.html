@@ -12,21 +12,23 @@
     <div class="Form-groom">
         <h1>Register Veterinarian</h1>
         <div class="Form">
-            <form action="">
-                <div class="user-box">
-                    <input type="file" name="" id="file">
-                    <label for="file"  id="File"><i class="fa-solid fa-upload"></i> Masukkan Ijazah</label>
-                    <input type="file" name="" id="file">
-                    <label for="file"  id="File"><i class="fa-solid fa-upload"></i> Masukkan Certificate</label>
-                    <input type="file" name="" id="file">
-                    <label for="file"  id="File"><i class="fa-solid fa-upload"></i> Masukkan Izin Praktek</label>
-                </div>
-                <div class="Submit-form">
-                    <button type="submit">REGISTER</button>
-                </div>
-            </form>
+                <form id="vetForm" enctype="multipart/form-data">
+                    <div class="user-box">
+                        <input type="file" name="ijazah" id="ijazah" accept=".pdf,.jpg,.jpeg,.png" required>
+                        <label for="ijazah" id="File"><i class="fa-solid fa-upload"></i> Masukkan Ijazah</label>
+                        <input type="file" name="certificate" id="certificate" accept=".pdf,.jpg,.jpeg,.png" required>
+                        <label for="certificate" id="File"><i class="fa-solid fa-upload"></i> Masukkan Certificate</label>
+                        <input type="file" name="izinpraktek" id="izinpraktek" accept=".pdf,.jpg,.jpeg,.png" required>
+                        <label for="izinpraktek" id="File"><i class="fa-solid fa-upload"></i> Masukkan Izin Praktek</label>
+                    </div>
+                    <div class="Submit-form">
+                        <button type="submit" class="submit">REGISTER</button>
+                    </div>
+                </form>
         </div>
     </div>
     <script src="../JS/index.js"></script>
+    <script src="../JS/regisvet.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 </body>
 </html>

@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <link rel="stylesheet" href="../CSS/orderlist.css" />
+    <link rel="stylesheet" href="../CSS/transaction.css" />
     <link
       rel="shortcut icon"
       href="../Assets/Logo-PetCare.png"
@@ -46,71 +46,91 @@
         </div>
       </nav>
 
-      <div class="container">
-          <div class="My-History">
-            <h1>Bank Transfer</h1>
-            <div class="booking-section">
-              <div class="date">BCA</div>
-              <div class="book-list">
-                <div class="book-info">
-                  <h1>Accout Number : 1234567890 </h1>
+      <div class="wrapper">
+        <main>
+          <div class="container">
+              <div class="My-History">
+                <h1>Bank Transfer</h1>
+                <div class="booking-section">
+                  <div class="date">BCA</div>
+                  <div class="book-list">
+                    <div class="book-info">
+                      <h1>Accout Number : 1234567890 </h1>
+                    </div>
+                    <button class="live-chat-button" id="invoice">Choose</button>
+                  </div>
                 </div>
-                <button class="live-chat-button">Choose</button>
               </div>
             </div>
-            <div class="booking-section">
-              <div class="date">Mandiri</div>
-              <div class="book-list">
-                <div class="book-info">
-                  <h1>Account Number : 9090909090090</h1>
+        </main>
+            <footer id="Contact-us">
+              <div class="Message-Website">
+                <div class="footer-text">
+                  <p>
+                    Find out more about <span class="pet-care">Pet Care</span> in our
+                    socials
+                  </p>
                 </div>
-                <button class="live-chat-button">Choose</button>
+                <div class="footer-icon">
+                  <img
+                    class="social-icon"
+                    src="../Assets/pngwing.com_1.png"
+                    alt="facebook"
+                  />
+                  <img
+                    class="social-icon"
+                    src="../Assets/pngwing.com_2.png"
+                    alt="twitter"
+                  />
+                  <img
+                    class="social-icon"
+                    src="../Assets/pngwing.com_8.png"
+                    alt="youtube"
+                  />
+                  <img
+                    class="social-icon"
+                    src="../Assets/pngwing.com_5.png"
+                    alt="google"
+                  />
+                  <img
+                    class="social-icon"
+                    src="../Assets/pngwing.com_6.png"
+                    alt="instagram"
+                  />
+                </div>
               </div>
-            </div>
-          </div>
-      </div>
+              <div class="Designed-footer">
+                <p>Copyright &copy;2024 Pet Care</p>
+              </div>
+            </footer>
+        </div>
 
-      <footer id="Contact-us">
-        <div class="Message-Website">
-          <div class="footer-text">
-            <p>
-              Find out more about <span class="pet-care">Pet Care</span> in our
-              socials
-            </p>
-          </div>
-          <div class="footer-icon">
-            <img
-              class="social-icon"
-              src="../Assets/pngwing.com_1.png"
-              alt="facebook"
-            />
-            <img
-              class="social-icon"
-              src="../Assets/pngwing.com_2.png"
-              alt="twitter"
-            />
-            <img
-              class="social-icon"
-              src="../Assets/pngwing.com_8.png"
-              alt="youtube"
-            />
-            <img
-              class="social-icon"
-              src="../Assets/pngwing.com_5.png"
-              alt="google"
-            />
-            <img
-              class="social-icon"
-              src="../Assets/pngwing.com_6.png"
-              alt="instagram"
-            />
-          </div>
+      <!--POP UP Transaction-->
+      <div id="invoiceModal" class="modal">
+        <div class="modal-content">
+            <span class="close">&times;</span>
+            <h2>Invoice</h2>
+            <div class="invoice-details">
+                <p><strong>Invoice Number:</strong> 001</p>
+                <p><strong>Date:</strong> 2024-05-26</p>
+                <p><strong>Customer:</strong> John Doe</p>
+                <p><strong>Items:</strong></p>
+                <ul>
+                    <li>Item 1 - $10.00</li>
+                    <li>Item 2 - $15.00</li>
+                    <li>Item 3 - $7.50</li>
+                </ul>
+                <p><strong>Total:</strong> $32.50</p>
+                <div class="invoice-btn">
+                  <button class="invoice-button">Pay</button>
+                </div>
+            </div>
         </div>
-        <div class="Designed-footer">
-          <p>Copyright &copy;2024 Pet Care</p>
-        </div>
-      </footer>
+    </div>
+
+      
 
       <script src="./JS/index.js"></script>
+      <script src="./JS/transaction.js"></script>
 </body>
 </html>

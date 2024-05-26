@@ -74,6 +74,42 @@ app.post('/upload-profile-pic', upload.single('profilePic'), async (req, res) =>
     }
 });
 
+app.post('/register-vet', upload.fields([
+    { name: 'ijazah', maxCount: 1 },
+    { name: 'certificate', maxCount: 1 },
+    { name: 'izinpraktek', maxCount: 1 }
+]), async (req, res) => {
+    try {
+        // Extract file paths from req.files object
+        const ijazahPath = req.files['ijazah'][0].filename;
+        const certificatePath = req.files['certificate'][0].filename;
+        const izinPraktekPath = req.files['izinpraktek'][0].filename;
+        const userId = req.body.userId;
+
+        // Insert the paths into the database
+        const vetId = await db('vets').insert({
+            description: "-",
+            scheduling: "-",
+            price: 0,
+            userid: userId,
+            certificate_path: certificatePath,
+            ijazah_path: ijazahPath,
+            izin_path: izinPraktekPath
+        }).returning('id');
+
+        await db('users')
+            .where('id', userId)
+            .update({
+                status: 3
+        });
+
+        res.status(200).json({ message: 'Veterinarian registered successfully', vetId: vetId[0] });
+    } catch (error) {
+        console.error('Error registering veterinarian:', error);
+        res.status(500).json({ error: 'Internal server error' });
+    }
+});
+
 app.post('/upload-groom-certificate', upload.single('certificate'), async (req, res) => {
     try {
         // Get user id from the request body
@@ -162,21 +198,50 @@ app.get('/transaction', (req, res) =>{
 // Serve static files from the 'uploads' folder
 app.use('/uploads', express.static(path.join(__dirname, 'uploads')));
 
-app.get('/api/groomersedit/:userid', async (req, res) => {
+
+app.get('/api/vets', async (req, res) => {
     try {
-        const { userid } = req.params;
-        const groomer = await db.select('groomers.id', 'groomers.description', 'groomers.price', 'groomers.scheduling')
-                                .from('groomers')
-                                .join('users', 'groomers.userid', 'users.id')
-                                .where('users.id', userid)
-                                .first();
-        res.json(groomer);
+        const vets = await db.select('vets.id', 'vets.description', 'vets.price', 'vets.userid', 'vets.rating', 'vets.scheduling', 'users.name', 'users.profile_pic_path')
+                                 .from('vets')
+                                 .join('users', 'vets.userid', 'users.id');
+        res.json(vets);
     } catch (error) {
-        console.error('Error fetching groomers:', error);
+        console.error('Error fetching vets:', error);
         res.status(500).json({ error: 'Internal server error' });
     }
 });
 
+app.get('/api/vets/:id', async (req, res) => {
+    const { id } = req.params;
+    try {
+        const groomer = await db.select('vets.id', 'vets.description', 'vets.price', 'vets.userid', 'vets.rating', 'vets.scheduling', 'users.name', 'users.profile_pic_path')
+        .from('vets')
+        .join('users', 'vets.userid', 'users.id')
+        .where('vets.id', id)
+        .first();
+        const schedules = await db.select('availibletime')
+        .from('vetschedule')
+        .where('vetid', id);
+        
+        res.json({ ...groomer, schedules });
+    } catch (error) {
+        console.error('Error fetching groomer details:', error);
+        res.status(500).json({ error: 'Internal server error' });
+    }
+});
+
+app.get('/api/vetschedule/:vetid', async (req, res) => {
+    try {
+        const { vetid } = req.params;
+        const schedules = await db.select('availibletime')
+        .from('vetschedule')
+        .where('vetid', vetid);
+        res.json(schedules);
+    } catch (error) {
+        console.error('Error fetching groomers schedule:', error);
+        res.status(500).json({ error: 'Internal server error' });
+    }
+});
 
 // Fetch all groomers with user details
 app.get('/api/groomers', async (req, res) => {
@@ -191,6 +256,72 @@ app.get('/api/groomers', async (req, res) => {
     }
 });
 
+
+
+// Fetch single groomer details
+app.get('/api/groomers/:id', async (req, res) => {
+    const { id } = req.params;
+    try {
+        const groomer = await db.select('groomers.id', 'groomers.description', 'groomers.price', 'groomers.userid', 'groomers.rating', 'groomers.scheduling', 'users.name', 'users.profile_pic_path')
+        .from('groomers')
+        .join('users', 'groomers.userid', 'users.id')
+        .where('groomers.id', id)
+        .first();
+        const schedules = await db.select('availibletime')
+        .from('groomerschedule')
+        .where('groomerid', id);
+        
+        res.json({ ...groomer, schedules });
+    } catch (error) {
+        console.error('Error fetching groomer details:', error);
+        res.status(500).json({ error: 'Internal server error' });
+    }
+});
+
+app.get('/api/groomerschedule/:groomerid', async (req, res) => {
+    try {
+        const { groomerid } = req.params;
+        const schedules = await db.select('availibletime')
+        .from('groomerschedule')
+        .where('groomerid', groomerid);
+        res.json(schedules);
+    } catch (error) {
+        console.error('Error fetching groomers schedule:', error);
+        res.status(500).json({ error: 'Internal server error' });
+    }
+});
+
+app.get('/api/vetsedit/:userid', async (req, res) => {
+    try {
+        const { userid } = req.params;
+        const vets = await db.select('vets.id', 'vets.description', 'vets.price', 'vets.scheduling')
+                                .from('vets')
+                                .join('users', 'vets.userid', 'users.id')
+                                .where('users.id', userid)
+                                .first();
+        res.json(vets);
+    } catch (error) {
+        console.error('Error fetching vets:', error);
+        res.status(500).json({ error: 'Internal server error' });
+    }
+});
+
+app.get('/api/groomersedit/:userid', async (req, res) => {
+    try {
+        const { userid } = req.params;
+        const groomer = await db.select('groomers.id', 'groomers.description', 'groomers.price', 'groomers.scheduling')
+                                .from('groomers')
+                                .join('users', 'groomers.userid', 'users.id')
+                                .where('users.id', userid)
+                                .first();
+                                res.json(groomer);
+                            } catch (error) {
+                                console.error('Error fetching groomers:', error);
+                                res.status(500).json({ error: 'Internal server error' });
+    }
+});
+
+
 app.get('/user/:name', async (req, res) => {
     const { name } = req.params;
     try {
@@ -202,22 +333,115 @@ app.get('/user/:name', async (req, res) => {
     }
 });
 
-// Fetch single groomer details
-app.get('/api/groomers/:id', async (req, res) => {
-    const { id } = req.params;
+app.post('/updatevet-servicedetail', async (req, res) => {
+    const { id, description, scheduling, price } = req.body;
     try {
-        const groomer = await db.select('groomers.id', 'groomers.description', 'groomers.price', 'groomers.userid', 'groomers.rating', 'groomers.scheduling', 'users.name', 'users.profile_pic_path')
-                                .from('groomers')
-                                .join('users', 'groomers.userid', 'users.id')
-                                .where('groomers.id', id)
-                                .first();
-        const schedules = await db.select('availibletime')
-                                  .from('groomerschedule')
-                                  .where('groomerid', id);
+        await db('vets')
+        .where('id', id)
+        .update({
+                description: description,
+                scheduling: scheduling,
+                price: price
+            });
+        res.status(200).json({ message: 'vet information updated successfully' });
+    } catch (error) {
+        console.error('Error updating user information:', error);
+        res.status(500).json({ error: 'Internal server error' });
+    }
+});
 
-                                  res.json({ ...groomer, schedules });
-                                } catch (error) {
-        console.error('Error fetching groomer details:', error);
+app.post('/api/updateVetSchedule', async (req, res) => {
+    const { vetId, selectedTimes, notSelectedTimes } = req.body;
+
+    try {
+        // Delete not selected times
+        if (notSelectedTimes.length > 0) {
+            await db('vetschedule')
+                .where('vetid', vetId)
+                .whereIn('availibletime', notSelectedTimes)
+                .del();
+        }
+
+        // Get existing times for the groomer
+        const existingTimes = await db('vetschedule')
+            .where('vetid', vetId)
+            .select('availibletime');
+
+        // Convert existing times to a Set for quick lookup
+        const existingTimesSet = new Set(existingTimes.map(time => time.availibletime));
+
+        // Filter selected times to get only new times that don't exist in the database
+        const timesToAdd = selectedTimes.filter(time => !existingTimesSet.has(time));
+
+        // Insert new selected times
+        if (timesToAdd.length > 0) {
+            const values = timesToAdd.map(time => ({
+                vetid: vetId,
+                availibletime: time
+            }));
+            await db('vetschedule').insert(values);
+        }
+
+        res.json({ success: true });
+    } catch (error) {
+        console.error('Error updating groomer schedule:', error);
+        res.status(500).json({ error: 'Internal server error' });
+    }
+});
+
+app.post('/updategroomer-servicedetail', async (req, res) => {
+    const { id, description, scheduling, price } = req.body;
+    try {
+        await db('groomers')
+        .where('id', id)
+        .update({
+                description: description,
+                scheduling: scheduling,
+                price: price
+            });
+        res.status(200).json({ message: 'groomer information updated successfully' });
+    } catch (error) {
+        console.error('Error updating user information:', error);
+        res.status(500).json({ error: 'Internal server error' });
+    }
+});
+
+// Add this new route to handle updating groomer schedules
+app.post('/api/updateGroomerSchedule', async (req, res) => {
+    const { groomerId, selectedTimes, notSelectedTimes } = req.body;
+
+    try {
+        // Delete not selected times
+        if (notSelectedTimes.length > 0) {
+            await db('groomerschedule')
+                .where('groomerid', groomerId)
+                .whereIn('availibletime', notSelectedTimes)
+                .del();
+        }
+
+        // Get existing times for the groomer
+        const existingTimes = await db('groomerschedule')
+            .where('groomerid', groomerId)
+            .select('availibletime');
+
+        // Convert existing times to a Set for quick lookup
+        const existingTimesSet = new Set(existingTimes.map(time => time.availibletime));
+
+        // Filter selected times to get only new times that don't exist in the database
+        const timesToAdd = selectedTimes.filter(time => !existingTimesSet.has(time));
+
+        // Insert new selected times
+        if (timesToAdd.length > 0) {
+            const values = timesToAdd.map(time => ({
+                groomerid: groomerId,
+                availibletime: time
+            }));
+            await db('groomerschedule').insert(values);
+        }
+
+        res.json({ success: true });
+    } catch (error) {
+        console.error('Error updating groomer schedule:', error);
         res.status(500).json({ error: 'Internal server error' });
     }
 });
@@ -227,8 +451,8 @@ app.post('/update-user', async (req, res) => {
     const { id, email, name, dob, gender, phone } = req.body;
     try {
         await db('users')
-            .where('id', id)
-            .update({
+        .where('id', id)
+        .update({
                 name: name,
                 email: email,
                 dob: dob,
@@ -245,8 +469,8 @@ app.post('/update-user', async (req, res) => {
 
 app.post('/register-user', (req, res) => {
     const {name, date, gender, phone, email, password} = req.body;
-    console.log("kgkgk");
-    console.log(gender);
+    // console.log("kgkgk");
+    // console.log(gender);
     db("users").insert({
         name: name,
         email: email,
@@ -270,7 +494,7 @@ app.post('/register-user', (req, res) => {
 
 app.post('/login-user', async (req, res) => {
     const { email, password } = req.body;
-    console.log(password);
+    // console.log(password);
 
     db.select('id','name', 'email', 'status')
     .from('users')

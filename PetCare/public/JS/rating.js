@@ -28,10 +28,17 @@ function selectStar(star) {
 
 function submitRating() {
   if (selectedRating >= 1 && selectedRating <= 5) {
-    alert(`Rating submitted: ${selectedRating}`);
+    Swal.fire({
+      title: "Thank you for rating our service!",
+      icon: "success"
+      // closePopup();
+    });
     closePopup();
   } else {
-    alert("Please select a rating between 1 and 5.");
+    Swal.fire({
+      title : "Please select a rating between 1 and 5!",
+      icon: "error"
+    });
   }
 }
 

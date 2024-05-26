@@ -134,11 +134,20 @@ footer{
     position: absolute;
     right: 0;
     left: 0;
-    bottom: 20;
+    bottom: 10;
     text-align: center;
-    z-index: 999;
+    z-index: 99;
 }
-
+.social-icon{
+    margin-left: 30px;
+    width: 30px;
+    height: 30px;
+}
+.footer-icon{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
 .Message-Website{
     height: 120px;
     background-color: #FBA834;
@@ -166,6 +175,7 @@ footer{
     background-color: black;
     color: white;
 }
+
 
 
 .garis-tiga{

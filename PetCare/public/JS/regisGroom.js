@@ -1,39 +1,18 @@
-// file.onchange = function() {
-    
-// }
-
-window.onload = async function() {
-    // Retrieve the user's name from sessionStorage
-    const userName = sessionStorage.getItem('name');
-    const userId = sessionStorage.getItem('id');
-    console.log(userId);
-    
-    // If the user's name is available
-    if (userName) {
-        try {
-            // Send a request to the server to fetch user data based on the name
-            const response = await fetch(`/user/${userName}`);
-            const userData = await response.json();
-            
-            // Populate the input fields with the user's data
-  
-            if(userData.status == 1){
-              window.URL
-            }else if(userData.status == 2 || userData.status == 3){
-              document.querySelector('.Vet').style.display = 'none';
-              document.querySelector('.Groom').style.display = 'none';
-              document.querySelector('.Edit').style.display = 'block';
-            }
-        } catch (error) {
-            console.error('Error fetching user data:', error);
-        }
+window.onload = () => {
+    if (sessionStorage.status == 3 || sessionStorage.status == 2) {
+      location.href = "/Edit";
     }
-  }
+  };
 
 document.querySelector('.Register').addEventListener('click', async (event) => {
     event.preventDefault();
     if(file.files[0]==null){
-        alert("You need to fill the picture");
+        Swal.fire({
+            title: "You need to fill the picture!",
+            icon: "error",
+            showConfirmButton: false,
+            timer: 500
+          });
         return;
     }
     uploadCertificate(file.files[0]);
@@ -50,12 +29,23 @@ async function uploadCertificate(file) {
             method: 'POST',
             body: formData
         });
+        sessionStorage.status = 2;
         const data = await response.json();
         console.log('Upload response:', data);
-        alert('Groom certificate uploaded successfully');
-        window.location.href = '/Edit';
-    } catch (error) {window.location.href = '/Edit';
+        Swal.fire({
+            title: "Groom certificate uploaded successfully",
+            icon: "success",
+            confirmButtonText: 'OK'
+          }).then((result) => {
+            if (result.isConfirmed) {
+              window.location.href = "/Edit";
+            }
+          });
+    } catch (error) {
         console.error('Error uploading certificate:', error);
-        alert('Error uploading certificate');
+        Swal.fire({
+            title: "Error uploading certificate",
+            icon: "error"
+          });
     }
 }

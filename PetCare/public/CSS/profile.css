@@ -89,7 +89,7 @@ nav ul li a:hover {
 }
 
 .container{
-    max-width: 1050px;
+    max-width: 850px;
     height: 55vh;
     width: 100%;
     background-color: #FBA834;
@@ -205,7 +205,7 @@ nav ul li a:hover {
 }
 
 .profile-picture .button-box .Save{
-    padding: 20px 20px 20px 20px;
+    padding: 10px 20px 10px 20px;
     border-radius: 40px;
     background-color: black;
     font-weight: bold;
@@ -251,37 +251,48 @@ nav ul li a:hover {
     z-index: 999;
 }
 
-
-footer {
-    position: absolute;
+footer{
+   position: absolute; 
+    top: 10;
     right: 0;
     left: 0;
-    bottom: 00;
+    bottom: 100;
     text-align: center;
     z-index: 99;
+    margin-top: 560px;
 }
 
-.Message-Website {
+.social-icon{
+    margin-left: 30px;
+    width: 30px;
+    height: 30px;
+}
+.footer-icon{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+.Message-Website{
     height: 120px;
     background-color: #FBA834;
     display: grid;
     place-items: center;
 }
 
-.footer-text {
+.footer-text{
     color: white;
 }
 
-.pet-care {
+.pet-care{
     color: black;
 }
 
-.Message-Website .footer-icon img {
+.Message-Website .footer-icon img{
     background-color: #FBA834;
     padding-bottom: 20px;
 }
 
-.Designed-footer {
+.Designed-footer{
     display: grid;
     place-items: center;
     height: 50px;

@@ -11,36 +11,6 @@ window.onload = () => {
   }
 };
 
-function openpopup() {
-  popup.classList.add("openpopup");
-}
-function closepopup() {
-  popup.classList.remove("openpopup");
-}
-
-function openpopupcross() {
-  cross.classList.add("openpopup");
-}
-
-function closepopupcross() {
-  cross.classList.remove("openpopup");
-}
-
-function openemailpop() {
-  popemail.classList.add("openpopup");
-}
-
-function closepopupemail() {
-  popemail.classList.remove("openpopup");
-}
-function openpasspop() {
-  poppassword.classList.add("openpopup");
-}
-
-function closepopuppass() {
-  poppassword.classList.remove("openpopup");
-}
-
 form.addEventListener("submit", (event) => {
   event.preventDefault();
 
@@ -72,16 +42,20 @@ form.addEventListener("submit", (event) => {
         sessionStorage.email = data.email;
         sessionStorage.id = data.id;
         sessionStorage.status = data.status;
-        openpopup();
-        setTimeout(() => {
-          closepopup();
-          window.location.href = "/homepage";
-        }, 500);
+        Swal.fire({
+          title: "Login Success",
+          icon: "success",
+          confirmButtonText: 'OK'
+        }).then((result) => {
+          if (result.isConfirmed) {
+            window.location.href = "/homepage";
+          }
+        });
       } else {
-        openpopupcross();
-        setTimeout(() => {
-          closepopupcross();
-        }, 500);
+        Swal.fire({
+          title: "Your Email or Password Incorrect",
+          icon: "error"
+        });
       }
     });
 });

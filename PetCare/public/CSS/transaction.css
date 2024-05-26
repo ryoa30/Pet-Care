@@ -2,11 +2,6 @@ body{
     margin: 0;
     padding: 0;
     overflow-x: hidden;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    flex-direction: column;
-    height: 100%;
     background-color: #f0f0f0;
 }
 
@@ -89,8 +84,22 @@ nav ul li a:hover{
     display: block;
 }
 
+.wrapper {
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
+}
+
+main {
+    flex: 1;
+}
+
 .container{
     margin-top: 100px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
     flex-wrap: wrap;
 }
 
@@ -161,52 +170,112 @@ h1 {
     border: 2px solid black;
 }
 
-footer{
-    width: 100%;
-    right: 0;
-    left: 0;
-    bottom: 10;
+h2{
     text-align: center;
-    z-index: 99;
 }
-.social-icon{
-    margin-left: 30px;
-    width: 30px;
-    height: 30px;
+
+.modal {
+    display: none;
+    position: fixed;
+    z-index: 100;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.4);
+    align-items: center;
+    justify-content: center;
 }
-.footer-icon{
+
+.modal-content {
+    background-color: #fefefe;
+    padding: 20px;
+    border: 1px solid #888;
+    width: 80%;
+    max-width: 500px;
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
+    border-radius: 10px;
+    box-sizing: border-box; 
+}
+
+.close {
+    color: #aaa;
+    float: right;
+    font-size: 28px;
+    font-weight: bold;
+    cursor: pointer;
+}
+
+.close:hover, .close:focus {
+    color: black;
+    text-decoration: none;
+}
+
+.invoice-btn{
     display: flex;
     justify-content: center;
     align-items: center;
 }
-.Message-Website{
+
+.invoice-button{
+    background-color: #000;
+    color: #fff;
+    border: none;
+    padding: 5px 10px;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 16px;
+    margin-left: 10px;
+}
+
+footer {
+    width: 100%;
+    right: 0;
+    left: 0;
+    bottom: 0;
+    text-align: center;
+    z-index: 99;
+}
+
+.social-icon {
+    margin-left: 30px;
+    width: 30px;
+    height: 30px;
+}
+
+.footer-icon {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.Message-Website {
     height: 120px;
     background-color: #FBA834;
     display: grid;
     place-items: center;
 }
 
-.footer-text{
+.footer-text {
     color: white;
 }
 
-.pet-care{
+.pet-care {
     color: black;
 }
 
-.Message-Website .footer-icon img{
+.Message-Website .footer-icon img {
     background-color: #FBA834;
     padding-bottom: 20px;
 }
 
-.Designed-footer{
+.Designed-footer {
     display: grid;
     place-items: center;
     height: 50px;
     background-color: black;
     color: white;
 }
-
 
 .garis-tiga{
     display: none;

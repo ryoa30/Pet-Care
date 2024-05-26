@@ -22,10 +22,20 @@ async function uploadProfilePic(file) {
       });
       const data = await response.json();
       console.log('Upload response:', data);
-      alert('Profile picture uploaded successfully');
+      Swal.fire({
+        title: "Profile picture uploaded successfully!",
+        icon: "success",
+        showConfirmButton: false,
+        timer: 800
+      });
   } catch (error) {
       console.error('Error uploading profile picture:', error);
-      alert('Error uploading profile picture');
+      Swal.fire({
+        title: "Error uploading profile picture!",
+        icon: "error",
+        showConfirmButton: false,
+        timer: 800
+      });
   }
 }
 
@@ -118,11 +128,17 @@ document.querySelector('.Save').addEventListener('click', async (event) => {
       const data = await response.json();
       console.log(data); // Log response from server
       // Optionally, display a message indicating success
-      alert('User information updated successfully');
+      Swal.fire({
+        title: "User information updated successfully!",
+        icon: "success"
+      });
   } catch (error) {
       console.error('Error updating user information:', error);
       // Handle error (e.g., display an error message)
-      alert('Error updating user information. Please try again.');
+      Swal.fire({
+        title: "Error updating user information. Please try again.",
+        icon: "error"
+      });
   }
 
 });

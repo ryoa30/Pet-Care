@@ -112,6 +112,7 @@ nav ul li a:hover{
     justify-content: center;
     margin-top: 100px;
     flex-wrap: wrap;
+    margin-bottom: 30px;
 }
 
 .Groomer-profile{
@@ -145,8 +146,7 @@ nav ul li a:hover{
     transition: 0.2s ease-in;
 }
 
-footer {
-    margin-top: 100px;
+footer{
     position: absolute;
     right: 0;
     left: 0;
@@ -154,34 +154,44 @@ footer {
     text-align: center;
     z-index: 99;
 }
-
-.Message-Website {
+.social-icon{
+    margin-left: 30px;
+    width: 30px;
+    height: 30px;
+}
+.footer-icon{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+.Message-Website{
     height: 120px;
     background-color: #FBA834;
     display: grid;
     place-items: center;
 }
 
-.footer-text {
+.footer-text{
     color: white;
 }
 
-.pet-care {
+.pet-care{
     color: black;
 }
 
-.Message-Website .footer-icon img {
+.Message-Website .footer-icon img{
     background-color: #FBA834;
     padding-bottom: 20px;
 }
 
-.Designed-footer {
+.Designed-footer{
     display: grid;
     place-items: center;
     height: 50px;
     background-color: black;
     color: white;
 }
+
 
 /* Modal styling */
 .modal {

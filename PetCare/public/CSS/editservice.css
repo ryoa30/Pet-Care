@@ -166,7 +166,7 @@ nav ul li a:hover{
 .times button {
     padding: 10px;
     border: 2px solid black;
-    background-color: transparent;
+    background-color: #FBA834;
     color: white;
     border-radius: 30px;
     cursor: pointer;
@@ -176,6 +176,11 @@ nav ul li a:hover{
 .times button:hover{
     background-color: black;
     color: white;
+}
+
+.times button.selected {
+    background-color: black !important; /* Ensure the background color changes */
+    color: white !important; /* Ensure the text color changes */
 }
 
 .actions {
