@@ -91,7 +91,25 @@ nav ul li a:hover{
     transition: 0.2s ease-in-out;
 }
 
+.time-btn {
+    padding: 10px;
+    border: 2px solid black;
+    background-color: #FBA834;
+    color: white;
+    border-radius: 30px;
+    cursor: pointer;
+    transition: 0.3s ease-in-out;
+}
 
+.time-btn:hover{
+    background-color: black;
+    color: white;
+}
+
+.time-btn.selected {
+    background-color: black !important; /* Ensure the background color changes */
+    color: white !important; /* Ensure the text color changes */
+}
 
 
 

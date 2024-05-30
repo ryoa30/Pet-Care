@@ -53,12 +53,12 @@ function showGroomerModal(groomerId) {
                         ${scheduleButtons}
                     </div>
                     <h2>Price: Rp. ${groomer.price}</h2>
-                    <button class="Btn-book" onclick="pindahhalaman('/BookVet?groomerId=${groomerId})">Book</button>
+                    <button class="Btn-book" onclick="pindahhalaman('/BookVet?groomerId=${groomerId}')">Book</button>
                     <button class="Btn-book" onclick="pindahhalaman('/LiveChat')">Live Chat</button>
                 </div>
             `;
 
-            document.getElementById('footer').style.display = 'none';
+            document.getElementById('Contact-us').style.display = 'none';
             modal.style.display = 'block';
             
         })

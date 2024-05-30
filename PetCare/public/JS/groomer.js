@@ -53,11 +53,11 @@ function showGroomerModal(groomerId) {
                         ${scheduleButtons}
                     </div>
                     <h2>Price: Rp. ${groomer.price}</h2>
-                    <button class="Btn-book" onclick="pindahhalaman('/BookGroomer?groomerId=${groomerId})">Book</button>
+                    <button class="Btn-book" onclick="changePage('/BookGroomer?groomerId=${groomerId}')">Book</button>
                 </div>
             `;
 
-            document.getElementById('footer').style.display = 'none';
+            document.getElementById('Contact-us').style.display = 'none';
             modal.style.display = 'block';
             
         })
@@ -68,4 +68,8 @@ function closeModal() {
     const modal = document.getElementById('myModal');
     modal.style.display = 'none';
     document.getElementById('footer').style.display = 'block';
+}
+
+function changePage(url) {
+    window.location.href = url;
 }

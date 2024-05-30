@@ -175,6 +175,16 @@ nav ul li a:hover{
     cursor: pointer;
 }
 
+.time-btn.selected{
+    background-color: black !important; /* Ensure the background color changes */
+    color: white !important; /* Ensure the text color changes */
+}
+
+.size-btn.selected{
+    background-color: black !important; /* Ensure the background color changes */
+    color: white !important; /* Ensure the text color changes */
+}
+
 .size-btn:hover, .time-btn:hover {
     background-color: #ddd;
 }

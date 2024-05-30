@@ -193,7 +193,129 @@ app.get('/transaction', (req, res) =>{
     res.sendFile(path.join(initialPath, "transaction.html"));
 })
 
+app.post('/api/bookgroomer', async (req, res) => {
+    const { groomerId, userId, selectedTime, selectedSize, calendar, address, note, price } = req.body;
+
+    try {
+        // Check if there is an existing booking with the same time, date, and vetId
+        const existingBooking = await db('groomerbookings')
+            .where({
+                groomerid: groomerId,
+                servicetime: selectedTime,
+                servicedate: calendar
+            })
+            .first();
+
+        if (existingBooking) {
+            // There is a conflicting booking
+            return res.json({ success: false, message: 'Time slot already booked.' });
+        }
+
+        // Insert the new booking into the vetbookings table
+        await db('groomerbookings').insert({
+            groomerid: groomerId,
+            userid: userId,
+            servicetime: selectedTime,
+            servicedate: calendar,
+            animalsize: selectedSize,
+            customeraddress: address,
+            servicenote: note,
+            price: price
+        });
+
+        res.json({ success: true });
+    } catch (error) {
+        console.error('Error booking appointment:', error);
+        res.status(500).json({ error: 'Internal server error' });
+    }
+});
+
+app.post('/api/bookvet', async (req, res) => {
+    const { vetId, userId, selectedTime, calendar, address, note, price } = req.body;
+
+    try {
+        // Check if there is an existing booking with the same time, date, and vetId
+        const existingBooking = await db('vetbookings')
+            .where({
+                vetid: vetId,
+                servicetime: selectedTime,
+                servicedate: calendar
+            })
+            .first();
+
+        if (existingBooking) {
+            // There is a conflicting booking
+            return res.json({ success: false, message: 'Time slot already booked.' });
+        }
+
+        // Insert the new booking into the vetbookings table
+        await db('vetbookings').insert({
+            vetid: vetId,
+            userid: userId,
+            servicetime: selectedTime,
+            servicedate: calendar,
+            customeraddress: address,
+            servicenote: note,
+            price: price
+        });
+
+        res.json({ success: true });
+    } catch (error) {
+        console.error('Error booking appointment:', error);
+        res.status(500).json({ error: 'Internal server error' });
+    }
+});
+
 // server.js
+// Endpoint to fetch joined data from groomerbookings, groomers, and users
+app.get('/api/groomerbookings/:userId', async (req, res) => {
+    try {
+        const userId = req.params.userId;
+        const data = await db
+            .select(
+                'groomerbookings.price', 
+                'groomerbookings.servicetime', 
+                'groomerbookings.servicedate', 
+                'groomerbookings.servicenote', 
+                'groomerbookings.animalsize', 
+                'groomerbookings.status', 
+                'users.name'
+            )
+            .from('groomerbookings')
+            .join('groomers', 'groomerbookings.groomerid', 'groomers.id')
+            .join('users', 'groomers.userid', 'users.id')
+            .where('groomerbookings.userid', userId);
+
+        res.json(data);
+    } catch (error) {
+        console.error('Error fetching joined data:', error);
+        res.status(500).json({ error: 'Internal server error' });
+    }
+});
+
+app.get('/api/vetbookings/:userId', async (req, res) => {
+    try {
+        const userId = req.params.userId;
+        const data = await db
+            .select(
+                'vetbookings.price', 
+                'vetbookings.servicetime', 
+                'vetbookings.servicedate', 
+                'vetbookings.servicenote', 
+                'vetbookings.status', 
+                'users.name'
+            )
+            .from('vetbookings')
+            .join('vets', 'vetbookings.vetid', 'vets.id')
+            .join('users', 'vets.userid', 'users.id')
+            .where('vetbookings.userid', userId);
+
+        res.json(data);
+    } catch (error) {
+        console.error('Error fetching joined data:', error);
+        res.status(500).json({ error: 'Internal server error' });
+    }
+});
 
 // Serve static files from the 'uploads' folder
 app.use('/uploads', express.static(path.join(__dirname, 'uploads')));
