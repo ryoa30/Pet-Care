@@ -279,7 +279,9 @@ app.get('/api/groomerbookings/:userId', async (req, res) => {
                 'groomerbookings.servicenote', 
                 'groomerbookings.animalsize', 
                 'groomerbookings.status', 
-                'users.name'
+                'users.name',
+                'groomerbookings.groomerid',
+                'groomerbookings.id'
             )
             .from('groomerbookings')
             .join('groomers', 'groomerbookings.groomerid', 'groomers.id')
@@ -293,6 +295,65 @@ app.get('/api/groomerbookings/:userId', async (req, res) => {
     }
 });
 
+app.get('/api/groomerbookingPay/:bookingId', async (req, res) => {
+    try {
+        const bookingId = req.params.bookingId;
+        const data = await db
+            .select(
+                'groomerbookings.price', 
+                'groomerbookings.servicedate', 
+                'groomerbookings.servicetime',
+                'users.name as customerName'
+            )
+            .from('groomerbookings')
+            .join('groomers', 'groomerbookings.groomerid', 'groomers.id')
+            .join('users', 'groomerbookings.userid', 'users.id')
+            .where('groomerbookings.id', bookingId)
+            .first();
+
+        if (!data) {
+            return res.status(404).json({ error: 'Booking not found' });
+        }
+
+        const today = new Date().toISOString().split('T')[0]; // Format date as YYYY-MM-DD
+
+        res.json({ ...data, today });
+    } catch (error) {
+        console.error('Error fetching joined data:', error);
+        res.status(500).json({ error: 'Internal server error' });
+    }
+});
+
+app.get('/api/vetbookingPay/:bookingId', async (req, res) => {
+    try {
+        const bookingId = req.params.bookingId;
+        const data = await db
+            .select(
+                'vetbookings.price', 
+                'vetbookings.servicedate', 
+                'vetbookings.servicetime',
+                'users.name as customerName'
+            )
+            .from('vetbookings')
+            .join('vets', 'vetbookings.vetid', 'vets.id')
+            .join('users', 'vetbookings.userid', 'users.id')
+            .where('vetbookings.id', bookingId)
+            .first();
+
+        if (!data) {
+            return res.status(404).json({ error: 'Booking not found' });
+        }
+
+        const today = new Date().toISOString().split('T')[0]; // Format date as YYYY-MM-DD
+
+        res.json({ ...data, today });
+    } catch (error) {
+        console.error('Error fetching joined data:', error);
+        res.status(500).json({ error: 'Internal server error' });
+    }
+});
+
+
 app.get('/api/vetbookings/:userId', async (req, res) => {
     try {
         const userId = req.params.userId;
@@ -303,7 +364,9 @@ app.get('/api/vetbookings/:userId', async (req, res) => {
                 'vetbookings.servicedate', 
                 'vetbookings.servicenote', 
                 'vetbookings.status', 
-                'users.name'
+                'users.name',
+                'vetbookings.vetid',
+                'vetbookings.id'
             )
             .from('vetbookings')
             .join('vets', 'vetbookings.vetid', 'vets.id')
@@ -399,6 +462,118 @@ app.get('/api/groomers/:id', async (req, res) => {
         res.status(500).json({ error: 'Internal server error' });
     }
 });
+
+app.post('/api/groomers/:id/rate', async (req, res) => {
+    const { id } = req.params;
+    const { rating } = req.body;
+  
+    try {
+      // Fetch current rating and custcount
+      const groomer = await db.select('rating', 'custcount')
+        .from('groomers')
+        .where('id', id)
+        .first();
+  
+      if (!groomer) {
+        return res.status(404).json({ error: 'Groomer not found' });
+      }
+  
+      // Calculate new rating
+      const currentRating = parseFloat(groomer.rating);
+        const newRating = parseFloat(rating);
+  
+        // Calculate new rating
+        const newCustCount = groomer.custcount + 1;
+        const updatedRating = ((currentRating * groomer.custcount) + newRating) / newCustCount;
+  
+      // Update groomer's rating and custcount
+      await db('groomers')
+        .where('id', id)
+        .update({
+          rating: updatedRating,
+          custcount: newCustCount
+        });
+  
+      res.json({ success: true, message: 'Rating submitted successfully' });
+    } catch (error) {
+      console.error('Error updating groomer rating:', error);
+      res.status(500).json({ success: false, error: 'Internal server error' });
+    }
+  });
+
+  app.post('/api/vets/:id/rate', async (req, res) => {
+    const { id } = req.params;
+    const { rating } = req.body;
+  
+    try {
+        // Fetch current rating and custcount
+        const vet = await db.select('rating', 'custcount')
+            .from('vets')
+            .where('id', id)
+            .first();
+  
+        if (!vet) {
+            return res.status(404).json({ error: 'Vet not found' });
+        }
+  
+        // Convert the rating to a float
+        const currentRating = parseFloat(vet.rating);
+        const newRating = parseFloat(rating);
+  
+        // Calculate new rating
+        const newCustCount = vet.custcount + 1;
+        const updatedRating = ((currentRating * vet.custcount) + newRating) / newCustCount;
+        
+        console.log(updatedRating);
+        // Update vet's rating and custcount
+        await db('vets')
+            .where('id', id)
+            .update({
+                rating: updatedRating.toFixed(1), // Keep one decimal place
+                custcount: newCustCount
+            });
+  
+        res.json({ success: true, message: 'Rating submitted successfully' });
+    } catch (error) {
+        console.error('Error updating vet rating:', error);
+        res.status(500).json({ success: false, error: 'Internal server error' });
+    }
+});
+
+  
+  app.patch('/api/groomerbookings/:id/status', async (req, res) => {
+    const { id } = req.params;
+    const { status } = req.body;
+  
+    try {
+      // Update booking status
+      await db('groomerbookings')
+        .where('id', id)
+        .update({ status });
+  
+      res.json({ success: true, message: 'Booking status updated successfully' });
+    } catch (error) {
+      console.error('Error updating booking status:', error);
+      res.status(500).json({ success: false, error: 'Internal server error' });
+    }
+  });
+
+  app.patch('/api/vetbookings/:id/status', async (req, res) => {
+    const { id } = req.params;
+    const { status } = req.body;
+  
+    try {
+      // Update booking status
+      await db('vetbookings')
+        .where('id', id)
+        .update({ status });
+  
+      res.json({ success: true, message: 'Booking status updated successfully' });
+    } catch (error) {
+      console.error('Error updating booking status:', error);
+      res.status(500).json({ success: false, error: 'Internal server error' });
+    }
+  });
 
 app.get('/api/groomerschedule/:groomerid', async (req, res) => {
     try {

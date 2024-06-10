@@ -12,6 +12,8 @@ document.addEventListener('DOMContentLoaded', () => {
     }
 });
 
+// function showGroomerHistory(userID)
+
 function showUserHistory(userId) {
     fetch(`/api/groomerbookings/${userId}`)
         .then(response => response.json())
@@ -33,7 +35,7 @@ function showUserHistory(userId) {
                         <div class="date">${formattedDate}</div>
                         <div class="book-list">
                             <div class="book-info">
-                                <h1>${booking.name}<br>Grooming Service </h1>
+                                <h1>${booking.name}<br>Grooming Service</h1>
                                 <p>
                                     Price: Rp. ${booking.price} <br>
                                     Time: ${booking.servicetime} <br>
@@ -41,8 +43,8 @@ function showUserHistory(userId) {
                                     Size: ${booking.animalsize} <br>
                                 </p>
                             </div>
-                            ${booking.status == 2 ? '<button class="live-chat-button" onclick="pindahhalaman(\'/transaction\')">Payment</button>' : ''}
-                            ${booking.status == 3 ? '<button class="live-chat-button" onclick="openPopup()">Rate</button>' : ''}
+                            ${booking.status == 2 ? `<button class="live-chat-button" onclick="pindahhalaman('/transaction?bookingId=${booking.id}&type=1')">Payment</button>` : ''}
+                            ${booking.status == 3 ? `<button class="live-chat-button" onclick="openPopup(${booking.groomerid}, 1, ${booking.id})">Rate</button>` : ''}
                         </div>
                     `;
                     section.innerHTML += bookingHTML;
@@ -51,7 +53,7 @@ function showUserHistory(userId) {
         })
         .catch(error => console.error('Error fetching booking data:', error));
 
-        fetch(`/api/vetbookings/${userId}`)
+    fetch(`/api/vetbookings/${userId}`)
         .then(response => response.json())
         .then(data => {
             const sections = {
@@ -71,16 +73,15 @@ function showUserHistory(userId) {
                         <div class="date">${formattedDate}</div>
                         <div class="book-list">
                             <div class="book-info">
-                                <h1>Dr. ${booking.name}<br>Vet Service </h1>
+                                <h1>Dr. ${booking.name}<br>Vet Service</h1>
                                 <p>
-                                    
                                     Price: Rp. ${booking.price} <br>
                                     Time: ${booking.servicetime} <br>
                                     Note: ${booking.servicenote} 
                                 </p>
                             </div>
-                            ${booking.status == 2 ? '<button class="live-chat-button" onclick="pindahhalaman(\'/transaction\')">Payment</button>' : ''}
-                            ${booking.status == 3 ? '<button class="live-chat-button" onclick="openPopup()">Rate</button>' : ''}
+                            ${booking.status == 2 ? `<button class="live-chat-button" onclick="pindahhalaman('/transaction?bookingId=${booking.id}&type=2')">Payment</button>` : ''}
+                            ${booking.status == 3 ? `<button class="live-chat-button" onclick="openPopup(${booking.vetid}, 2, ${booking.id})">Rate</button>` : ''}
                         </div>
                     `;
                     section.innerHTML += bookingHTML;

@@ -128,9 +128,9 @@ nav ul li a:hover{
 }
 
 .Groomer-picture img{
-    width: 100%;
+    width: 300px;
     border-radius: 30px;
-    height: 15vw;
+    height: 250px;
 }
 
 .Groomer-text{
