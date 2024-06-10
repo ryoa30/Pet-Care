@@ -295,6 +295,33 @@ app.get('/api/groomerbookings/:userId', async (req, res) => {
     }
 });
 
+app.get('/api/groomerbookings/:userId/role', async (req, res) => {
+    try {
+        const userId = req.params.userId;
+        const data = await db
+            .select(
+                'groomerbookings.price', 
+                'groomerbookings.servicetime', 
+                'groomerbookings.servicedate', 
+                'groomerbookings.servicenote', 
+                'groomerbookings.animalsize', 
+                'groomerbookings.status', 
+                'users.name',
+                'groomerbookings.groomerid',
+                'groomerbookings.id'
+            )
+            .from('groomerbookings')
+            .join('groomers', 'groomerbookings.groomerid', 'groomers.id')
+            .join('users', 'groomers.userid', 'users.id')
+            .where('groomers.userid', userId);
+
+        res.json(data);
+    } catch (error) {
+        console.error('Error fetching joined data:', error);
+        res.status(500).json({ error: 'Internal server error' });
+    }
+});
+
 app.get('/api/groomerbookingPay/:bookingId', async (req, res) => {
     try {
         const bookingId = req.params.bookingId;
@@ -353,6 +380,31 @@ app.get('/api/vetbookingPay/:bookingId', async (req, res) => {
     }
 });
 
+app.get('/api/vetbookings/:userId/role', async (req, res) => {
+    try {
+        const userId = req.params.userId;
+        const data = await db
+            .select(
+                'vetbookings.price', 
+                'vetbookings.servicetime', 
+                'vetbookings.servicedate', 
+                'vetbookings.servicenote', 
+                'vetbookings.status', 
+                'users.name',
+                'vetbookings.vetid',
+                'vetbookings.id'
+            )
+            .from('vetbookings')
+            .join('vets', 'vetbookings.vetid', 'vets.id')
+            .join('users', 'vets.userid', 'users.id')
+            .where('vets.userid', userId);
+
+        res.json(data);
+    } catch (error) {
+        console.error('Error fetching joined data:', error);
+        res.status(500).json({ error: 'Internal server error' });
+    }
+});
 
 app.get('/api/vetbookings/:userId', async (req, res) => {
     try {
